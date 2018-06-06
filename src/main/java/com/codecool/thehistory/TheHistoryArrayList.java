@@ -11,7 +11,7 @@ public class TheHistoryArrayList implements TheHistory {
     @Override
     public void add(String text) {
         String[] splittedList = text.split(" ");
-        for (String element: splittedList) {
+        for (String element : splittedList) {
             wordsArrayList.add(element);
         }
     }
@@ -57,8 +57,8 @@ public class TheHistoryArrayList implements TheHistory {
 //        }
 
         /* Version 3 - 63ms */
-        for(int counter=0; counter < wordsArrayList.size(); counter++) {
-            if(wordsArrayList.get(counter).equals(from)) {
+        for (int counter = 0; counter < wordsArrayList.size(); counter++) {
+            if (wordsArrayList.get(counter).equals(from)) {
                 wordsArrayList.set(counter, to);
             }
         }
@@ -67,7 +67,57 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
-        //TODO: check the TheHistory interface for more information
+
+        int sizeOfArray = fromWords.length;
+        ArrayList<String> fromArrayList = new ArrayList<String>(Arrays.asList(fromWords));
+        ArrayList<String> toArrayList = new ArrayList<String>(Arrays.asList(toWords));
+
+        for(int counter = 0; counter < wordsArrayList.size()-1; counter++) {
+            if (wordsArrayList.get(counter).equals(fromWords[0]) && wordsArrayList.size() > counter+sizeOfArray) {
+                ArrayList<String> checker = new ArrayList<>(wordsArrayList.subList(counter, counter + sizeOfArray));
+                if (checker.equals(fromArrayList)) {
+
+                    //version 1 : removing one by one and inserting one by one
+//                    for (int i=0; i < sizeOfArray; i++) {
+//                         wordsArrayList.remove(counter);
+//                    }
+//
+//                    for (int i = toArrayList.size()-1; i>=0 ; i--) {
+//                        wordsArrayList.add(counter, toArrayList.get(i));
+//                    }
+
+                    //version 2 : copy 3 arrays into one (first part+towords+second part)
+                    ArrayList<String > firstPart = new ArrayList<>(wordsArrayList.subList(0,counter));
+                    ArrayList<String> thirdPart = new ArrayList<>(wordsArrayList.subList(counter + sizeOfArray, wordsArrayList.size()));
+
+                    wordsArrayList.clear();
+
+                    wordsArrayList.addAll(firstPart);
+                    wordsArrayList.addAll(toArrayList);
+                    wordsArrayList.addAll(thirdPart);
+
+                    //version 3 : convert to array and back
+                }
+            }
+        }
+
+//        int sizeOfArray = fromWords.length;
+//        boolean[] checker = new boolean[sizeOfArray];
+//
+//        for (int counter = 0; counter < wordsArrayList.size() - 1; counter++) {
+//            if (wordsArrayList.get(counter).equals(fromWords[0])) {
+//                if (wordsArrayList.size() >= counter + sizeOfArray) {
+//                    for (int wordsCheck = 1; wordsCheck < sizeOfArray; wordsCheck++) {
+//                        if (wordsArrayList.get(counter + wordsCheck).equals(fromWords[wordsCheck])) {
+//                            checker[wordsCheck-1] = true;
+//                            System.out.println("Suspicious: " + counter + " " + wordsCheck);
+//                            if checker
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
     }
 
     @Override

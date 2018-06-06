@@ -37,7 +37,15 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
-        //TODO: check the TheHistory interface for more information
+
+//        int sizeOfArray = fromWords.length;
+//        String[] checker = new String[sizeOfArray];
+//
+//        for(int counter = 0; counter < wordsArrayList.size()-1; counter++) {
+//            if (wordsArrayList[counter].equals(fromWords[0])) {
+//                System.arraycopy(wordsArrayList,counter, checker, 0, sizeOfArray);
+//            }
+//        }
     }
 
     @Override
