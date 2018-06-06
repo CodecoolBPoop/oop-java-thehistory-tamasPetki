@@ -11,7 +11,7 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void add(String text) {
-        //TODO: check the TheHistory interface for more information
+//        private String[] readedText = text.split(" ");
     }
 
     @Override

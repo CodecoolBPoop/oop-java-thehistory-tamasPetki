@@ -1,9 +1,6 @@
 package com.codecool.thehistory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class TheHistoryArrayList implements TheHistory {
     /**
@@ -13,28 +10,59 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void add(String text) {
-        //TODO: check the TheHistory interface for more information
+        String[] splittedList = text.split(" ");
+        for (String element: splittedList) {
+            wordsArrayList.add(element);
+        }
     }
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        //TODO: check the TheHistory interface for more information
+        wordsArrayList.remove(wordToBeRemoved);
     }
 
     @Override
     public int size() {
-        //TODO: check the TheHistory interface for more information
-        return 0;
+        return wordsArrayList.size();
     }
 
     @Override
     public void clear() {
-        //TODO: check the TheHistory interface for more information
+        wordsArrayList.clear();
     }
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
+        /* Version 1 - 120ms */
+//        Iterator<String> iter = wordsArrayList.iterator();
+//
+//        int indexCounter = 0;
+//
+//        while(iter.hasNext()) {
+//            String value = iter.next();
+//            if(value.equals(from)) {
+//                wordsArrayList.set(indexCounter,to);
+//            }
+//            indexCounter++;
+//        }
+
+
+        /* Version 2 - 167ms */
+//        ListIterator<String> iter = wordsArrayList.listIterator();
+//
+//        while (iter.hasNext()) {
+//            if(iter.next().equals(from)) {
+//                iter.set(to);
+//            }
+//        }
+
+        /* Version 3 - 63ms */
+        for(int counter=0; counter < wordsArrayList.size(); counter++) {
+            if(wordsArrayList.get(counter).equals(from)) {
+                wordsArrayList.set(counter, to);
+            }
+        }
+
     }
 
     @Override
