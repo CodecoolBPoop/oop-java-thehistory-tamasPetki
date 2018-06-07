@@ -89,20 +89,18 @@ public class TheHistoryArrayList implements TheHistory {
         for (int counter = 0; counter < wordsArrayList.size(); counter++) {
             if (!wordsArrayList.get(counter).equals(fromWords[0])) {
                 resultArray.add(wordsArrayList.get(counter));
-            }
-
-            else {
-                ArrayList<String> checker = new ArrayList<>(wordsArrayList.subList(counter, counter + sizeOfArray));
-                if (checker.equals(fromArrayList)) {
-                    resultArray.addAll(toArrayList);
-                    if (counter + fromWords.length < wordsArrayList.size()) {
-                        counter = counter + fromWords.length;
+            } else {
+                if (counter + fromWords.length <= wordsArrayList.size()) {
+                    ArrayList<String> checker = new ArrayList<>(wordsArrayList.subList(counter, counter + sizeOfArray));
+                    if (checker.equals(fromArrayList)) {
+                        resultArray.addAll(toArrayList);
+                        if (counter + fromWords.length <= wordsArrayList.size()) {
+                            counter = counter + fromWords.length - 1;
+                        }
+                    } else {
+                        resultArray.add(wordsArrayList.get(counter));
                     }
-                } else {
-                    resultArray.add(wordsArrayList.get(counter));
                 }
-            }
-
 
 //                            ArrayList<String> thirdPart = new ArrayList<>(wordsArrayList.subList(counter + sizeOfArray, wordsArrayList.size()));
 //                            wordsArrayList.subList(counter, wordsArrayList.size()).clear();
@@ -110,7 +108,7 @@ public class TheHistoryArrayList implements TheHistory {
 //                            wordsArrayList.addAll(thirdPart);
 //                            counter = counter+toWords.length-1;
 
-            //version 1 : removing one by one and inserting one by one
+                //version 1 : removing one by one and inserting one by one
 //                    for (int i = 0; i < sizeOfArray; i++) {
 //                        wordsArrayList.remove(counter);
 //                    }
@@ -120,7 +118,7 @@ public class TheHistoryArrayList implements TheHistory {
 //                    }
 //                    counter = counter + toWords.length - 1;
 
-            //version 2 : copy 3 arrays into one (first part+towords+second part)
+                //version 2 : copy 3 arrays into one (first part+towords+second part)
 //                    ArrayList<String> firstPart = new ArrayList<>(wordsArrayList.subList(0,counter));
 //                    ArrayList<String> thirdPart = new ArrayList<>(wordsArrayList.subList(counter + sizeOfArray, wordsArrayList.size()));
 
@@ -132,7 +130,7 @@ public class TheHistoryArrayList implements TheHistory {
 //
 //                    wordsArrayList.addAll(thirdPart);
 
-            //version 3 : convert to array and
+                //version 3 : convert to array and
 //                    String[] resultArray = new String[wordsArrayList.size() - fromWords.length + toWords.length];
 //
 //                    String[] stringArr = new String[wordsArrayList.size()];
@@ -146,9 +144,12 @@ public class TheHistoryArrayList implements TheHistory {
 //                    System.arraycopy(toWords, 0, resultArray, counter, toWords.length);
 //                    System.arraycopy(stringArr, counter + fromWords.length, resultArray, counter + toWords.length, stringArr.length-(counter+fromWords.length));
 //                    counter = counter + toWords.length - 1;
+            }
         }
-    }
 
+        wordsArrayList.clear();
+        wordsArrayList = new ArrayList<>(resultArray);
+    }
 
 
 //        int sizeOfArray = fromWords.length;
