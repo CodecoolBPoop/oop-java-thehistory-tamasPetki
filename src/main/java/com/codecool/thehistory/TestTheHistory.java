@@ -101,6 +101,7 @@ public class TestTheHistory {
         if (!sourceText.equals(result)) {
             System.out.println("11. replace() IS NOT WORKING AS EXPECTED!");
         }
+
     }
 
     public static void runAllTests(TheHistory theHistory) {
