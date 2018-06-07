@@ -100,6 +100,8 @@ public class TheHistoryArrayList implements TheHistory {
                     } else {
                         resultArray.add(wordsArrayList.get(counter));
                     }
+                } else {
+                    resultArray.add(wordsArrayList.get(counter));
                 }
 
 //                            ArrayList<String> thirdPart = new ArrayList<>(wordsArrayList.subList(counter + sizeOfArray, wordsArrayList.size()));
