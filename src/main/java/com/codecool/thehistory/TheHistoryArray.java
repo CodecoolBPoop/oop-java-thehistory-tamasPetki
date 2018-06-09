@@ -11,23 +11,38 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void add(String text) {
-//        private String[] readedText = text.split(" ");
+        String[] textArray = text.split(" ");
+        wordsArray = textArray;
     }
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        //TODO: check the TheHistory interface for more information
+        String[] temp = new String[wordsArray.length];
+
+        int tempindex = 0;
+        int counter = 0;
+
+        for (int wordsindex = 0; wordsindex < wordsArray.length; wordsindex++) {
+            if(!wordsArray[wordsindex].equals(wordToBeRemoved)) {
+                temp[tempindex] = wordsArray[wordsindex];
+                tempindex++;
+            } else {
+                counter++;
+            }
+        }
+
+        wordsArray = temp;
+        wordsArray = Arrays.copyOf(wordsArray,temp.length - counter);
     }
 
     @Override
     public int size() {
-        //TODO: check the TheHistory interface for more information
-        return 0;
+        return wordsArray.length;
     }
 
     @Override
     public void clear() {
-        //TODO: check the TheHistory interface for more information
+        wordsArray = new String[0];
     }
 
     @Override
@@ -38,15 +53,29 @@ public class TheHistoryArray implements TheHistory {
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
 
-//        int sizeOfArray = fromWords.length;
-//        String[] checker = new String[sizeOfArray];
-//
-//        for(int counter = 0; counter < wordsArrayList.size()-1; counter++) {
-//            if (wordsArrayList[counter].equals(fromWords[0])) {
-//                System.arraycopy(wordsArrayList,counter, checker, 0, sizeOfArray);
-//            }
-//        }
+        for(String word: wordsArray) {
+            if(word.equals())
+        }
+
+
+        String [] temp = new String[wordsArray.length];
+
+        int tempindex = 0;
+        int counter = 0;
+
+        for (int wordsindex = 0; wordsindex < wordsArray.length; wordsindex++) {
+            if(!wordsArray[wordsindex].equals(fromWords[0])) {
+                temp[tempindex] = wordsArray[wordsindex];
+                tempindex++;
+            } else {
+                counter++;
+            }
+        }
+
+        wordsArray = temp;
+        wordsArray = Arrays.copyOf(wordsArray,temp.length - counter);
     }
+
 
     @Override
     public String toString() {
