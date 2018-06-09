@@ -23,7 +23,7 @@ public class TheHistoryArray implements TheHistory {
         int counter = 0;
 
         for (int wordsindex = 0; wordsindex < wordsArray.length; wordsindex++) {
-            if(!wordsArray[wordsindex].equals(wordToBeRemoved)) {
+            if (!wordsArray[wordsindex].equals(wordToBeRemoved)) {
                 temp[tempindex] = wordsArray[wordsindex];
                 tempindex++;
             } else {
@@ -32,7 +32,7 @@ public class TheHistoryArray implements TheHistory {
         }
 
         wordsArray = temp;
-        wordsArray = Arrays.copyOf(wordsArray,temp.length - counter);
+        wordsArray = Arrays.copyOf(wordsArray, temp.length - counter);
     }
 
     @Override
@@ -47,33 +47,150 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
+
+        for (int i = 0; i < wordsArray.length; i++) {
+            if (wordsArray[i].equals(from)) {
+                wordsArray[i] = to;
+            }
+        }
     }
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
 
-        for(String word: wordsArray) {
-            if(word.equals())
+        int occurrence = 0;
+        String[] checkerArray = new String[fromWords.length];
+
+
+        // if fromWords greater the toWords
+        if (fromWords.length > toWords.length) {
+            for (int i = 0; i < wordsArray.length; i++) {
+                if (wordsArray[i].equals(fromWords[0])) {
+                    if ((i + fromWords.length) < wordsArray.length) {
+                        for (int x = 0; x < checkerArray.length; x++) {
+                            checkerArray[x] = wordsArray[i + x];
+                        }
+                        if (Arrays.equals(checkerArray, fromWords)) {
+                            occurrence++;
+                        }
+                    }
+
+
+                }
+            }
+
+            String[] resultArray = new String[wordsArray.length + (fromWords.length - toWords.length) * occurrence];
+
+            for (int check = 0, resultIndex = 0; check < wordsArray.length; check++) {
+
+                //check if first word equals first fromWord
+                if (wordsArray[check].equals(fromWords[0])) {
+
+                    //check if the wordsArray length is longer than fromWords and the current index
+                    if ((check + fromWords.length) < wordsArray.length) {
+
+                        //if yes, then check the next part if equals
+                        for (int x = 0; x < fromWords.length; x++) {
+                            checkerArray[x] = wordsArray[check + x];
+                        }
+
+                        //if equals then change it to toWords
+                        if (Arrays.equals(checkerArray, fromWords)) {
+                            for (int y = 0; y < toWords.length; y++) {
+                                resultArray[resultIndex + y] = toWords[y];
+                            }
+
+                            resultIndex = resultIndex + toWords.length;
+                            check = check + fromWords.length - 1;
+
+                            //if not, then just copy to resultArray and move on
+                        } else {
+                            resultArray[resultIndex] = wordsArray[check];
+                            resultIndex++;
+                        }
+                    }
+                }
+            }
+
+            wordsArray = Arrays.copyOf(resultArray, resultArray.length);
         }
 
+        //if toWords greater than fromWords
+        if (fromWords.length < toWords.length) {
+            for (int i = 0; i < wordsArray.length; i++) {
+                if (wordsArray[i].equals(fromWords[0])) {
+                    if ((i + fromWords.length) < wordsArray.length) {
+                        for (int x = 0; x < checkerArray.length; x++) {
+                            checkerArray[x] = wordsArray[i + x];
+                        }
+                        if (Arrays.equals(checkerArray, fromWords)) {
+                            occurrence++;
+                        }
+                    }
 
-        String [] temp = new String[wordsArray.length];
 
-        int tempindex = 0;
-        int counter = 0;
+                }
+            }
 
-        for (int wordsindex = 0; wordsindex < wordsArray.length; wordsindex++) {
-            if(!wordsArray[wordsindex].equals(fromWords[0])) {
-                temp[tempindex] = wordsArray[wordsindex];
-                tempindex++;
-            } else {
-                counter++;
+
+            String[] resultArray = new String[wordsArray.length + (toWords.length - fromWords.length) * occurrence];
+
+            for (int check = 0, resultIndex = 0; check < wordsArray.length; check++) {
+
+                //check if first word equals first fromWord
+                if (wordsArray[check].equals(fromWords[0])) {
+
+                    //check if the wordsArray length is longer than fromWords and the current index
+                    if ((check + fromWords.length) < wordsArray.length) {
+
+                        //if yes, then check the next part if equals
+                        for (int x = 0; x < fromWords.length; x++) {
+                            checkerArray[x] = wordsArray[check + x];
+                        }
+
+                        //if equals then change it to toWords
+                        if (Arrays.equals(checkerArray, fromWords)) {
+                            for (int y = 0; y < toWords.length; y++) {
+                                resultArray[resultIndex + y] = toWords[y];
+                            }
+
+                            resultIndex = resultIndex + toWords.length;
+                            check = check + fromWords.length -1;
+
+                            //if not, then just copy to resultArray and move on
+                        } else {
+                            resultArray[resultIndex] = wordsArray[check];
+                            resultIndex++;
+                        }
+                    }
+                }
+            }
+
+            wordsArray = Arrays.copyOf(resultArray, resultArray.length);
+        }
+
+        if (fromWords.length == toWords.length) {
+            for (int i = 0; i < wordsArray.length; i++) {
+                if (wordsArray[i].equals(fromWords[0])) {
+                    if ((i + fromWords.length) < wordsArray.length) {
+                        for (int x = 0; x < checkerArray.length; x++) {
+                            checkerArray[x] = wordsArray[i + x];
+                        }
+                        if (Arrays.equals(checkerArray, fromWords)) {
+                            for (int x = 0; x < toWords.length; x++) {
+                                wordsArray[i + x] = toWords[x];
+                            }
+                            i = i + toWords.length - 1;
+                        }
+                    }
+
+
+                }
             }
         }
 
-        wordsArray = temp;
-        wordsArray = Arrays.copyOf(wordsArray,temp.length - counter);
+
+
     }
 
 
