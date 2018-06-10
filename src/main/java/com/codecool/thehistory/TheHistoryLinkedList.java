@@ -1,9 +1,6 @@
 package com.codecool.thehistory;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class TheHistoryLinkedList implements TheHistory {
     /**
@@ -13,43 +10,57 @@ public class TheHistoryLinkedList implements TheHistory {
 
     @Override
     public void add(String text) {
-        //TODO: check the TheHistory interface for more information
+        String[] splittedList = text.split(" ");
+        for (String element : splittedList) {
+            wordsLinkedList.add(element);
+        }
     }
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        //TODO: check the TheHistory interface for more information
+        wordsLinkedList.remove(wordToBeRemoved);
     }
 
     @Override
     public int size() {
-        //TODO: check the TheHistory interface for more information
-        return 0;
+        return wordsLinkedList.size();
+
     }
 
     @Override
     public void clear() {
-        //TODO: check the TheHistory interface for more information
+        wordsLinkedList.clear();
     }
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
+        for (int counter = 0; counter < wordsLinkedList.size(); counter++) {
+            if (wordsLinkedList.get(counter).equals(from)) {
+                wordsLinkedList.set(counter, to);
+            }
+        }
     }
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
-        //TODO: check the TheHistory interface for more information
+
+        LinkedList<String> fromLinkedList = new LinkedList<String>(Arrays.asList(fromWords));
+        LinkedList<String> toLinkedList = new LinkedList<String>(Arrays.asList(toWords));
+
+        LinkedList<String> resultArray = new LinkedList<String>();
+
+        Iterator<String> iter = wordsLinkedList.listIterator();
+
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (String word : wordsLinkedList) {
-            sb.append(word).append(" ");
+        @Override
+        public String toString () {
+            StringBuilder sb = new StringBuilder();
+            for (String word : wordsLinkedList) {
+                sb.append(word).append(" ");
+            }
+            if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1); // last space char
+            return sb.toString();
         }
-        if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1); // last space char
-        return sb.toString();
-    }
 
-}
+    }

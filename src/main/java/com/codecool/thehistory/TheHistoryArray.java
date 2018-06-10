@@ -74,8 +74,6 @@ public class TheHistoryArray implements TheHistory {
                             occurrence++;
                         }
                     }
-
-
                 }
             }
 
@@ -109,10 +107,12 @@ public class TheHistoryArray implements TheHistory {
                             resultIndex++;
                         }
                     }
+                } else {
+                    resultArray[resultIndex] = wordsArray[check];
+                    resultIndex++;
                 }
             }
-
-            wordsArray = Arrays.copyOf(resultArray, resultArray.length);
+            wordsArray = resultArray;
         }
 
         //if toWords greater than fromWords
@@ -127,8 +127,6 @@ public class TheHistoryArray implements TheHistory {
                             occurrence++;
                         }
                     }
-
-
                 }
             }
 
@@ -155,7 +153,8 @@ public class TheHistoryArray implements TheHistory {
                             }
 
                             resultIndex = resultIndex + toWords.length;
-                            check = check + fromWords.length -1;
+                            check = check + fromWords.length - 1;
+
 
                             //if not, then just copy to resultArray and move on
                         } else {
@@ -163,11 +162,14 @@ public class TheHistoryArray implements TheHistory {
                             resultIndex++;
                         }
                     }
+                } else {
+                    resultArray[resultIndex] = wordsArray[check];
+                    resultIndex++;
                 }
             }
-
-            wordsArray = Arrays.copyOf(resultArray, resultArray.length);
+            wordsArray = resultArray;
         }
+
 
         if (fromWords.length == toWords.length) {
             for (int i = 0; i < wordsArray.length; i++) {
@@ -183,14 +185,9 @@ public class TheHistoryArray implements TheHistory {
                             i = i + toWords.length - 1;
                         }
                     }
-
-
                 }
             }
         }
-
-
-
     }
 
 
